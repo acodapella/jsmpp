@@ -43,6 +43,11 @@ public class RegisteredDelivery {
         setSMEOriginatedAcknowledgement(smeOriginatedAcknowledgement);
     }
     
+    public RegisteredDelivery(SMSCDeliveryReceipt smscDeliveryReceipt, IntermediateNotification intermediateNotification) {
+        setSMSCDeliveryReceipt(smscDeliveryReceipt);
+        setIntermediateNotification(intermediateNotification);
+    }
+    
     public byte value() {
         return value;
     }
