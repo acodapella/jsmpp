@@ -33,9 +33,15 @@ public enum SMSCDeliveryReceipt {
     SUCCESS_FAILURE((byte)0x01), 
     /**
      * SMSC Delivery Receipt requested where the final delivery outcome is
-     * delivery failure.
+     * delivery failure. This includes scenarios where the message was cancelled 
+     * via the cancel_sm operation.
      */
-    SUCCESS((byte)0x02);
+    FAILURE((byte)0x02),
+    /**
+     * SMSC Delivery Receipt requested where the final delivery outcome is
+     * delivery success
+     */
+    SUCCESS((byte)0x03);
 
     public static final byte CLEAR_BYTE = (byte)0xfc; // 11111100
     public static final byte MASK_BYTE = 0x03; // 00000011
