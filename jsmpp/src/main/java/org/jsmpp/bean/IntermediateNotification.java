@@ -20,8 +20,19 @@ package org.jsmpp.bean;
  * 
  */
 public enum IntermediateNotification {
-    NOT_REQUESTED((byte)0x00), // xxx0xxxx
-    REQUESTED((byte)0x00); // xxx0xxxx
+	/**
+	 * No Intermediate notification requested (default) <br>
+	 *  bits: xxx0xxxx
+	 */
+    NOT_REQUESTED((byte)0x00),
+    /**
+     * Intermediate notification requested
+	 * Support for Intermediate Notification Functionality is
+	 * specific to the MC implementation and is beyond the
+	 * scope of the SMPP Protocol Specification. <br>
+	 *  bits: xxx1xxxx
+     */
+    REQUESTED((byte)0x10);
     
     public static final byte CLEAR_BYTE = (byte)0xef; // 11101111
     public static final byte MASK_BYTE = 0x10; // 00010000
