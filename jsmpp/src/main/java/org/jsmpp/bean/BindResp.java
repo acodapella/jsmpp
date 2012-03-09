@@ -66,6 +66,11 @@ public class BindResp extends Command {
     	return OptionalParameters.get(tagEnum.code(), optionalParameters);
     }
     
+    public OptionalParameter getOptionalParameter(short tagValue)
+    {
+    	return OptionalParameters.get(tagValue, optionalParameters);
+    }
+    
     public OptionalParameter[] getOptionalParameters() {
         return optionalParameters;
     }
