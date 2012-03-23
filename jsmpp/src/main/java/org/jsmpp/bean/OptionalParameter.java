@@ -1542,7 +1542,7 @@ public abstract class OptionalParameter {
 	 * The ms_availability_status parameter is used in the alert_notification operation to indicate the
 	 * availability state of the MS to the ESME. <br>
 	 * If the SMSC does not include the parameter in the alert_notification operation, the ESME
-	 * should assume that the MS is in an “available” state. <br>
+	 * should assume that the MS is in an "available" state. <br>
 	 * <br>
 	 * 0 = Available (Default) <br>
 	 * 1 = Denied (e.g. suspended, no SMS capability, etc.) <br>
@@ -1962,8 +1962,47 @@ public abstract class OptionalParameter {
 		}
 
 	}
-
 	
+	/**
+	 * The source_node_id is a unique number assigned within a single ESME or MC network and must <br>
+	 * uniquely identify an originating node within the context of the MC or ESME. The content of a <br>
+	 * source_node_id is comprised of decimal digits and is at the discretion of the owning ESME or MC. <br>
+	 * Value must be a sequence of 6 decimal digits.
+	 * @author valgeirg
+	 * 
+	 */
+	public static class Source_node_id extends OptionalParameter.OctetString {
+		public Source_node_id(byte value[]) {
+			super(Tag.SOURCE_NODE_ID.code, value);
+		}
+		public Source_node_id(int value) {
+			this(String.format("%06d", value).getBytes());
+		}
+		public int getAsNumber() {
+			return Integer.valueOf(getValueAsString());
+		}
+	}
+
+	/**
+	 * The  dest_network_type parameter is used to indicate  a network type associated with the <br>
+	 * estination address of a message. In the case that the receiving system (e.g. MC) does not <br>
+	 * support the indicated network type, it may treat this a failure and return a response PDU <br>
+	 * reporting a failure. Value must be a sequence of 6 decimal digits.
+	 * @author valgeirg
+	 *
+	 */
+	public static class Dest_node_id extends OptionalParameter.OctetString {
+		public Dest_node_id(byte value[]) {
+			super(Tag.DEST_NODE_ID.code, value);
+		}
+		public Dest_node_id(int value) {
+			this(String.format("%06d", value).getBytes());
+		}
+		public int getAsNumber() {
+			return Integer.valueOf(getValueAsString());
+		}
+	}
+
 	/**
 	 * The display_time parameter is used to associate a display time of the short message on the MS. <br>
 	 * <br>
@@ -2056,7 +2095,7 @@ public abstract class OptionalParameter {
 	
 	/**
 	 * The its_reply_type parameter is a required parameter for the CDMA Interactive Teleservice as
-	 * defined by the Korean PCS carriers [KORITS]. It indicates and controls the MS user’s reply
+	 * defined by the Korean PCS carriers [KORITS]. It indicates and controls the MS user's reply
 	 * method to an SMS delivery message received from the ESME. <br>
 	 * <br>
 	 * 0 = Digit <br>
@@ -2219,6 +2258,8 @@ public abstract class OptionalParameter {
         MESSAGE_STATE(0x0427, Message_state.class), 
         USSD_SERVICE_OP(0x0501, Ussd_service_op.class), 
         BILLING_IDENTIFICATION(0x060B, Billing_identification.class),
+        SOURCE_NODE_ID(0x060F, Source_node_id.class),
+        DEST_NODE_ID(0x0610, Dest_node_id.class),
         DISPLAY_TIME(0x1201, Display_time.class), 
         SMS_SIGNAL(0x1203, Sms_signal.class), 
         MS_VALIDITY(0x1204, Ms_validity.class), 
