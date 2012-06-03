@@ -189,6 +189,10 @@ public class OptionalParameters {
             	return new OptionalParameter.Ussd_service_op(content);
             case BILLING_IDENTIFICATION:
             	return new OptionalParameter.Billing_identification(content);
+            case SOURCE_NETWORK_ID:
+            	return new OptionalParameter.Source_network_id(content);
+            case DEST_NETWORK_ID:
+            	return new OptionalParameter.Dest_network_id(content);
             case SOURCE_NODE_ID:
             	return new OptionalParameter.Source_node_id(content);
             case DEST_NODE_ID:

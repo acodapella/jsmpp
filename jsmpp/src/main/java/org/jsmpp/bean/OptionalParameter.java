@@ -1964,6 +1964,38 @@ public abstract class OptionalParameter {
 	}
 	
 	/**
+	 * The source_network_id assigned to a wireless network operator or ESME operator is a
+	 * unique address that may be derived and assigned by the node owner without establishing a
+	 * central assignment and management authority. When this TLV is specified, it must be
+	 * accompanied with a source_node_id TLV Ref. 4.8.4.58.<br>
+	 * <br>
+	 * Wireless Network Technology: Generic
+	 * @author stefanth
+	 *
+	 */
+	public static class Source_network_id extends OptionalParameter.COctetString {
+		public Source_network_id(byte value[]) {
+			super(Tag.SOURCE_NETWORK_ID.code, value);
+		}
+	}
+
+	/**
+	 * The dest_network_id assigned to a wireless network operator or ESME operator is a unique
+	 * address that may be derived and assigned by the node owner without establishing a central
+	 * assignment and management authority. When this TLV is specified, it must be accompanied
+	 * with a dest_node_id TLV Ref.4.8.4.27. <br>
+	 * <br>
+	 * Wireless Network Technology: Generic
+	 * @author stefanth
+	 *
+	 */
+	public static class Dest_network_id extends OptionalParameter.COctetString {
+		public Dest_network_id(byte value[]) {
+			super(Tag.DEST_NETWORK_ID.code, value);
+		}
+	}
+	
+	/**
 	 * The source_node_id is a unique number assigned within a single ESME or MC network and must <br>
 	 * uniquely identify an originating node within the context of the MC or ESME. The content of a <br>
 	 * source_node_id is comprised of decimal digits and is at the discretion of the owning ESME or MC. <br>
@@ -2258,6 +2290,8 @@ public abstract class OptionalParameter {
         MESSAGE_STATE(0x0427, Message_state.class), 
         USSD_SERVICE_OP(0x0501, Ussd_service_op.class), 
         BILLING_IDENTIFICATION(0x060B, Billing_identification.class),
+        SOURCE_NETWORK_ID(0x060D, Source_network_id.class),
+        DEST_NETWORK_ID(0x060E, Dest_network_id.class),
         SOURCE_NODE_ID(0x060F, Source_node_id.class),
         DEST_NODE_ID(0x0610, Dest_node_id.class),
         DISPLAY_TIME(0x1201, Display_time.class), 
