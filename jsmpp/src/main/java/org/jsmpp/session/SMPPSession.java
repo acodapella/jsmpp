@@ -62,6 +62,7 @@ import org.jsmpp.session.connection.Connection;
 import org.jsmpp.session.connection.ConnectionFactory;
 import org.jsmpp.session.connection.socket.SocketConnectionFactory;
 import org.jsmpp.util.DefaultComposer;
+import org.jsmpp.util.ThreadFactory_jsmpp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -575,7 +576,7 @@ public class SMPPSession extends AbstractSession implements ClientSession {
 	 */
 	private class PDUReaderWorker extends Thread {
 		// start with serial execution of pdu processing, when the session is bound the pool will be enlarge up to the PduProcessorDegree
-	    private ExecutorService executorService = Executors.newFixedThreadPool(1); 
+	    private ExecutorService executorService = Executors.newFixedThreadPool(1, new ThreadFactory_jsmpp("PDUReaderWorkerPool: " + this.toString()));
 		
 	    public PDUReaderWorker() {
         	super("PDUReaderWorker: " + SMPPSession.this);
