@@ -11,5 +11,9 @@ syntax:glob
 .project
 .classpath
 
+# Intellij Idea Project Files
+.idea/
+*.iml
+
 version.properties
 git.properties
