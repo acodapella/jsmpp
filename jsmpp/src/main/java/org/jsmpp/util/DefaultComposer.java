@@ -224,15 +224,15 @@ public class DefaultComposer implements PDUComposer {
         buf.append(destAddrTon);
         buf.append(destAddrNpi);
         buf.append(destinationAddr);
-        buf.append(esmClass);
-        buf.append(protocolId);
+        //buf.append(esmClass);
+        //buf.append(protocolId);
         buf.append(priorityFlag);
         buf.append(scheduleDeliveryTime);
         buf.append(validityPeriod);
         buf.append(registeredDelivery);
-        buf.append(replaceIfPresentFlag);
+        //buf.append(replaceIfPresentFlag);
         buf.append(dataCoding);
-        buf.append(smDefaultMsgId);
+        //buf.append(smDefaultMsgId);
         buf.append((byte)shortMessage.length);
         buf.append(shortMessage);
         buf.appendAll(optionalParameters);
@@ -345,7 +345,7 @@ public class DefaultComposer implements PDUComposer {
         buf.append((byte)shortMessage.length);
         buf.append(shortMessage);
         buf.appendAll(optionalParameters);
-        ;
+
         return buf.toBytes();
     }
 
