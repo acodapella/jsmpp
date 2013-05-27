@@ -243,6 +243,9 @@ public class OptionalParameters {
     @SuppressWarnings("unchecked")
     public static <U extends OptionalParameter> U get(Class<U> tagClass, OptionalParameter[] parameters)
     {
+        if (parameters == null) {
+            return null;
+        }
         for(OptionalParameter i: parameters) {
             if(i.getClass() == tagClass) {
                 return (U)i;

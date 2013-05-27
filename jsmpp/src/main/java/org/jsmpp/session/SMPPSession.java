@@ -80,7 +80,7 @@ import org.slf4j.LoggerFactory;
  * 
  * All SMPP operation (request-response) is blocking, for an example: SUBMIT_SM
  * will be blocked until SUBMIT_SM_RESP received or timeout. This looks like
- * synchronous communication, but the {@link SMPPClient} implementation give
+ * synchronous communication, but the {SMPPClient} implementation give
  * ability to the asynchronous way by executing the SUBMIT_SM operation parallel
  * on a different thread. The very simple implementation by using Thread pool,
  * {@link ExecutorService} will do.
@@ -241,22 +241,22 @@ public class SMPPSession extends AbstractSession implements ClientSession {
 			return smscSystemId;
 		} catch (PDUException e) {
 		    logger.error("Failed sending bind command", e);
-		    throw new IOException("Failed sending bind since some string parameter area invalid : " + e.getMessage());
+		    throw new IOException("Failed sending bind since some string parameter area invalid : " + e.getMessage(), e);
 		} catch (NegativeResponseException e) {
 			String message = "Receive negative bind response";
 			logger.error(message, e);
 			close();
-			throw new IOException(message + ": " + e.getMessage());
+			throw new IOException(message + ": " + e.getMessage(), e);
 		} catch (InvalidResponseException e) {
 			String message = "Receive invalid response of bind";
 			logger.error(message, e);
 			close();
-			throw new IOException(message + ": " + e.getMessage());
+			throw new IOException(message + ": " + e.getMessage(), e);
 		} catch (ResponseTimeoutException e) {
 			String message = "Waiting bind response take time to long";
 			logger.error(message, e);
 			close();
-			throw new IOException(message + ": " + e.getMessage());
+			throw new IOException(message + ": " + e.getMessage(), e);
 		} catch (IOException e) {
 			logger.error("IO Error occur", e);
 			close();
@@ -270,7 +270,7 @@ public class SMPPSession extends AbstractSession implements ClientSession {
 	 * @param bindType is the bind type.
 	 * @param systemId is the system id.
 	 * @param password is the password.
-	 * @param systemTypeis the system type.
+	 * @param systemType is the system type.
 	 * @param interfaceVersion is the interface version.
 	 * @param addrTon is the address TON.
 	 * @param addrNpi is the address NPI.
@@ -495,6 +495,8 @@ public class SMPPSession extends AbstractSession implements ClientSession {
 		public void processDeliverSm(DeliverSm deliverSm) throws ProcessRequestException {
 			try {
 				fireAcceptDeliverSm(deliverSm);
+			} catch(ProcessRequestException e) {
+				throw e;
 			} catch(Exception e) {
 				String msg = "Invalid runtime exception thrown when processing DeliverSm";
 				logger.error(msg, e);
@@ -506,6 +508,8 @@ public class SMPPSession extends AbstractSession implements ClientSession {
 		        throws ProcessRequestException {
 			try {
 				return fireAcceptDataSm(dataSm);
+			} catch(ProcessRequestException e) {
+				throw e;
 			} catch(Exception e) {
 				String msg = "Invalid runtime exception thrown when processing DataSm";
 				logger.error(msg, e);

@@ -42,9 +42,10 @@ public abstract class OptionalParameter {
      */
     public byte[] serialize() {
         byte[] value = serializeValue();
-        ByteBuffer buffer = ByteBuffer.allocate(value.length + 4);
-        buffer.putShort(tag);
-        buffer.putShort((short)value.length);
+        ByteBuffer buffer = ByteBuffer.allocate(value.length + 3);
+        buffer.put((byte)1);
+        buffer.put((byte)1);
+        buffer.put((byte)1);
         buffer.put(value);
         return buffer.array();
     }
